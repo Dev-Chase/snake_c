@@ -8,16 +8,17 @@ extern "C" {
 
 // Prototypes go here
 typedef struct {
-  Vector2 pos;
+  Vector2 *body;
   Vector2 dir;
-} BodyBlock;
-
-typedef struct {
-  BodyBlock *body;
-  int len;
+  uint16_t len_b; // Length of Body and Allocated Memory
 } Snake;
 
-BodyBlock *new_body_block();
+bool game_over(Snake *snake);
+void move_snake(Snake *snake);
+Rectangle get_rect(Vector2 pos);
+void grow_snake(Snake *snake);
+bool collides_snake(Snake *snake, Vector2 *block_pos);
+void draw_snake(Snake *snake);
 
 #ifdef __cplusplus
 }
