@@ -31,7 +31,6 @@ int main(void) {
   char title_text[25] = "Press Space to Start";
   char sub_title_text[25] = "";
 
-  uint16_t score;
   char *score_text;
   bool show_score = false;
 
@@ -71,8 +70,7 @@ int main(void) {
 
         // Initialize New Game if not in Paused State
         if (!is_paused) {
-          score = 0;
-          asprintf(&score_text, "Score: %d", score);
+          asprintf(&score_text, "Score: 0");
           if (snake.len_b > 1) {
             snake.body = realloc(snake.body, 1);
             snake.len_b = 1;
@@ -111,9 +109,9 @@ int main(void) {
         continue;
       }
       if (collides_snake(&snake, &food)) {
-        score++;
-        asprintf(&score_text, "Score: %d", score);
         grow_snake(&snake);
+        asprintf(&score_text, "Score: %d",
+                 (snake.len_b - 1) / (TILE_SIZE / MOVE_SPEED));
         do {
           random_pos(&snake, &food);
         } while (collides_snake(&snake, &food));

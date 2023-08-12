@@ -10,7 +10,7 @@ extern "C" {
 typedef struct {
   Vector2 *body;
   Vector2 dir;
-  uint16_t len_b; // Length of Body and Allocated Memory
+  uint16_t len_b; // Length of Body in sizeof(Vector2)
 } Snake;
 
 bool game_over(Snake *snake);
